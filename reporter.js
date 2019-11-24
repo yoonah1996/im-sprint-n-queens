@@ -21,6 +21,6 @@ function MyReporter(runner) {
       passed,
       failed
     }
-    fs.writeFileSync('result.json', JSON.stringify(result));
+    fs.writeFileSync('results.json', JSON.stringify(result));
   });
 }

@@ -6,12 +6,14 @@
     "lib": "lib"
   },
   "scripts": {
-    "test": "mocha __test__/ --timeout 20000",
+    "test": "npm-run-all -c -s --silent run-test report-test",
+    "run-test": "mocha __test__/test.mocha --timeout 20000",
+    "report-test": "mocha __test__/test.mocha --timeout 20000 --reporter reporter.js --exit",
     "precommit": "lint-staged",
     "lint": "./node_modules/.bin/eslint src",
-    "test-for-submit": "mocha __test__/ --timeout 20000 --reporter reporter.js --exit",
-    "run-submit": "node .airci/submit.js",
-    "submit": "npm-run-all -c -s --silent test-for-submit run-submit"
+    "pre-test": "node __test__/preTest.js",
+    "check": "node .airci/submit.js",
+    "submit": "npm-run-all -s --silent pre-test check"
   },
   "lint-staged": {
     "linters": {
@@ -36,11 +38,11 @@
   "devDependencies": {
     "chai": "^4.1.2",
     "colors": "^1.3.3",
-    "npm-run-all": "^4.1.5",
     "eslint": "^5.6.0",
     "husky": "^1.0.1",
     "lint-staged": "^7.3.0",
     "mocha": "^5.2.0",
-    "puppeteer": "^1.12.2"
+    "npm-run-all": "^4.1.5",
+    "puppeteer": "^1.20.0"
   }
 }
