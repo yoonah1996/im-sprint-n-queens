@@ -25,15 +25,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/codestates/im07-2018-06-n-queens.git"
+    "url": "git+https://github.com/codestates/im-sprint-n-queens.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/codestates/im07-2018-06-n-queens/issues"
+    "url": "https://github.com/codestates/im-sprint-n-queens/issues"
   },
-  "homepage": "https://github.com/codestates/im07-2018-06-n-queens#readme",
+  "homepage": "https://github.com/codestates/im-sprint-n-queens#readme",
   "dependencies": {},
   "devDependencies": {
     "chai": "^4.1.2",
