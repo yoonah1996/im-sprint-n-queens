@@ -6,14 +6,10 @@
     "lib": "lib"
   },
   "scripts": {
-    "test": "npm-run-all -c -s --silent run-test report-test",
-    "run-test": "mocha __test__/test.mocha --timeout 20000",
-    "report-test": "mocha __test__/test.mocha --timeout 20000 --reporter reporter.js --exit",
+    "test": "mocha __test__/test.mocha --timeout 20000",
     "precommit": "lint-staged",
-    "lint": "./node_modules/.bin/eslint src",
-    "pre-test": "node __test__/preTest.js",
-    "check": "node .airci/submit.js",
-    "submit": "npm-run-all -s --silent pre-test check"
+    "lint": "eslint src",
+    "submit": "node .travis/submit.js"
   },
   "lint-staged": {
     "linters": {
