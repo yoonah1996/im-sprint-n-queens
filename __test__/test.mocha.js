@@ -56,11 +56,6 @@ describe("n-queens", async function() {
     describe("here are some dynamic It() tests", function() {
       cases.forEach(function(test, i) {
         it(test, function() {
-          if (!passed[i]) {
-            console.log("\t" + "-".repeat(failed[i].length));
-            console.log("\t" + failed[i]);
-            console.log("\t" + "-".repeat(failed[i].length));
-          }
           expect(passed[i]).to.eql(true);
         });
       });
