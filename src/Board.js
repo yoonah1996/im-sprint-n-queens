@@ -150,6 +150,7 @@
     // --------------------------------------------------------------
     //
     // 주어진 행(rowIndex)에 충돌하는 말이 있는지 확인합니다.
+    // 충돌하는 말이 있으면 true 없으면 false 반환
     hasRowConflictAt: function(rowIndex) {
       return false; // fixme
     },
