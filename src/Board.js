@@ -81,7 +81,6 @@
     _getFirstRowColumnIndexForMajorDiagonalOn: function(rowIndex, colIndex) {
       return colIndex - rowIndex;
     },
-
     // 특정 좌표가 주어졌을 때, 해당 좌표를 지나는 반대각선의 첫 번째 행 컬럼을 반환합니다.
     // ex) rowIndex: 1, colIndex: 3이 주어졌을 때 4 반환
     //          -1 0 1 2 3 4
