@@ -150,12 +150,34 @@
     //
     // 주어진 행(rowIndex)에 충돌하는 말이 있는지 확인합니다.
     // 충돌하는 말이 있으면 true 없으면 false 반환
+    // ----------------------
+    //       0    [0,0,0,0]1
+    //       1    [0,0,0,1]
+    //       2    [0,0,1,0]
+    //       3    [0,1,0,0]
+
+
+    // this.get(rowIndex)[colIndex]
     hasRowConflictAt: function(rowIndex) {
+      let flag = false;
+      let arr = this.rows();
+      for(let i=0; i < arr.length; i++){
+        if(arr[rowIndex][i] === 1){
+          if(flag === false){
+            flag = true;
+          }else{
+            return true;
+          }
+        }
+      }
       return false; // fixme
     },
 
     // 체스 판 위에 행 충돌이 하나라도 있는지 검사합니다.
     hasAnyRowConflicts: function() {
+      for(let i=0; i<this.get('n'); i++){
+        if(this.hasRowConflictAt(i) === true) return true;
+      }
       return false; // fixme
     },
 
@@ -164,11 +186,24 @@
     //
     // 주어진 열(colIndex)에 충돌하는 말이 있는지 확인합니다.
     hasColConflictAt: function(colIndex) {
+      let flag = false;
+      for(let i=0; i<this.get('n'); i++){
+        if(this.get(i)[colIndex] === 1 ){
+          if(flag === false){
+            flag = true;
+          }else{
+            return true;
+          }
+        }
+      }
       return false; // fixme
     },
 
     // 체스 판 위에 열 충돌이 하나라도 있는지 검사합니다.
     hasAnyColConflicts: function() {
+      for(let i=0; i<this.get('n'); i++){
+        if(this.hasColConflictAt(i) === true) return true;
+      }
       return false; // fixme
     },
 
