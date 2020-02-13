@@ -74,10 +74,10 @@
     // ex) rowIndex: 1, colIndex: 0이 주어졌을 때 -1 반환
     //          -1 0 1 2 3 4
     // ----------------------
-    //       0   1[0,0,0,0]
-    //       1    [1,0,0,0]
-    //       2    [0,1,0,0]
-    //       3    [0,0,1,0]
+    //       0   1[1,0,0,1]
+    //       1    [1,1,0,0]1
+    //       2    [0,1,1,0] 0 1
+    //       3    [0,0,1,1] 0 0 1
     _getFirstRowColumnIndexForMajorDiagonalOn: function(rowIndex, colIndex) {
       return colIndex - rowIndex;
     },
@@ -211,12 +211,34 @@
     // --------------------------------------------------------------
     //
     // 주어진 주대각선에 충돌하는 말이 있는지 확인합니다.
-    hasMajorDiagonalConflictAt: function(majorDiagonalColumnIndexAtFirstRow) {
+    hasMajorDiagonalConflictAt: function(colI) {
+      let flag = false;
+      let arr = this.rows();
+      for(let row=0; row < arr.length; row++){
+        for(let col = colI; col < arr.length; col++){
+          if(colI === (col-row)){
+            if(arr[row][col] === 1){
+              if(flag === false){
+                flag = true;
+              }else{
+                return true;
+              }
+            }
+          }      
+        }
+      }
       return false; // fixme
     },
 
     // 체스 판 위에 주대각선 충돌이 하나라도 있는지 검사합니다.
     hasAnyMajorDiagonalConflicts: function() {
+      let arr = this.rows();
+      for(let row=0; row<arr.length; row++){
+        for(let col=0; col<arr.length; col++){
+          let majorDiagonalColumnIndexAtFirstRow = this._getFirstRowColumnIndexForMajorDiagonalOn(row,col);
+          if(this.hasMajorDiagonalConflictAt(majorDiagonalColumnIndexAtFirstRow) === true) return true;
+        }
+      }
       return false; // fixme
     },
 
@@ -230,6 +252,13 @@
 
     // 체스 판 위에 반대각선 충돌이 하나라도 있는지 검사합니다.
     hasAnyMinorDiagonalConflicts: function() {
+      let arr = this.rows();
+      for(let row=0; row<arr.length; row++){
+        for(let col=0; col<arr.length; col++){
+          let minorDiagonalColumnIndexAtFirstRow = this._getFirstRowColumnIndexForMinorDiagonalOn(row,col);
+          if(this.hasMinorDiagonalConflictAt(minorDiagonalColumnIndexAtFirstRow) === true) return true;
+        }
+      }
       return false; // fixme
     },
 
