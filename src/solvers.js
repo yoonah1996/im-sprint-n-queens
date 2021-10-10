@@ -111,8 +111,6 @@ window.solutionMatrixCount = function (matrixTree, j , n, solutionCount) {
   }
 }
 
-
-
 window.findNRooksSolution = function (n) {
   var solution = [];  // 이차원 배열을 반환하기 위해 빈배열을 만듬
   let newArr = [];  // solution배열에 넣을 일차 빈배열을 만듬
@@ -234,13 +232,11 @@ window.hasMinorDiagonalConflictAt = function(minorDiagonalColumnIndexAtFirstRow,
   let flag = false;
   for(let row = 0; row < n; row++){
     for(let col = minorDiagonalColumnIndexAtFirstRow; col >= 0; col--){
-      if(minorDiagonalColumnIndexAtFirstRow === (row+col)){
-        if(arr[row][col] === 1){
-          if(flag === false){
-            flag = true;
-          }else{
-            return true;
-          }
+      if(minorDiagonalColumnIndexAtFirstRow === (row+col) && arr[row][col] === 1){
+        if(flag === false){
+          flag = true;
+        }else{
+          return true;
         }
       }
     }
@@ -263,7 +259,10 @@ window.findNQueensMatrix = function (matrixTree, j , n) {
   for (let i = 0; i < n; i++) {   // 인자로 받은 matrixTree에 자식을 n개 넣기 위한 for문 작성
     let childSolution = JSON.parse(JSON.stringify(matrixTree.matrix)); // 깊은 복사를 위해 matrixTree의 matrix프로퍼티의 배열을 JSON.stringify를 통해 문자열로 변환 후 다시 JSON.parse를 통해 배열로 반환
     childSolution[j][i] = 1; // 복사된 부모 체스판에서 row가 j이고 col이 i인곳에 0대신 1을 넣는다(체스말 올리기)
-    if ((this.hasAnyRowConflicts(n, childSolution) === false) && (this.hasAnyColConflicts(n, childSolution) === false) && (this.hasAnyMinorDiagonalConflicts(n, childSolution) === false)&& (this.hasAnyMajorDiagonalConflicts(n, childSolution) === false)) { // n rook이기 때문에 열과 행만 검사
+    if ((this.hasAnyRowConflicts(n, childSolution) === false)
+     && (this.hasAnyColConflicts(n, childSolution) === false)
+     && (this.hasAnyMinorDiagonalConflicts(n, childSolution) === false)
+     && (this.hasAnyMajorDiagonalConflicts(n, childSolution) === false)) { // n rook이기 때문에 열과 행만 검사
       if(j === n - 1) return childSolution; // 만약 j가 n-1이면 반환 (j는 열에 해당하는 index이고 n은 횟수이기 때문에 n-1은 인덱스의 마지막을 뜻함으로 j가 마지막 인덱스 즉 모든 열에 말을 위치했다고 가정)
       let childmatrix = new MatrixTree(childSolution); //부모에에 넣을 자식 생성
       if (j < n) { //열 index인 j가 n by n의 2차원 배열 안에 있는 값일 때 실행
@@ -276,7 +275,6 @@ window.findNQueensMatrix = function (matrixTree, j , n) {
     }
   }
 }
-
 
 // n이 주어졌을 때 n queens 문제의 해답 한 개를 반환합니다.
 // 반환 값은 체스 판을 나타내는 2차원 배열입니다.
@@ -313,11 +311,13 @@ window.findNQueensSolution = function (n) {
 window.countNQueensSolutions = function (n) {
   var solutionCount = 0; // fixme
   let board = new Board({n:n});
+
   recursion = function(rowIndex) {
     if(rowIndex === n){
       solutionCount++;
       return;
     }
+
     for(let i = 0; i < n; i++){
       board.togglePiece(rowIndex, i);
       if(!board.hasAnyQueensConflicts()) {
